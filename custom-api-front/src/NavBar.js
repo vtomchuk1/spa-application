@@ -1,3 +1,4 @@
+import {Link} from "react-router-dom";
 
 function NavBar(){
     return (<header>
@@ -5,59 +6,17 @@ function NavBar(){
             <div className="container">
                 <div className="header__logo">
                     <h1>
-                        <img src="fonts/icons/main/Logo_Forum.svg" alt="logo" />
+                        <img src="/fonts/icons/main/Logo_Forum.svg" alt="logo" />
                     </h1>
                     <div className="header__logo-btn" data-dropdown-btn="logo">
-                        Unity<i className="icon-Arrow_Below"></i>
+                        <Link to='/' >
+                        SPA
+                        </Link>
                     </div>
-                    <nav className="dropdown dropdown--design-01" data-dropdown-list="logo">
-                        <ul className="dropdown__catalog">
-                            <li><a href="index.html">Home Page</a></li>
-                            <li><a href="single-topic.html">Single Topic Page</a></li>
-                            <li><a href="simple-signup.html">Sign up Page</a></li>
-                            <li><a href="create-topic.html">Create Topic Page</a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <div className="header__search">
-                    <form action="#">
-                        <label>
-                            <i className="icon-Search js-header-search-btn-open"></i>
-                            <input type="search" placeholder="Search all forums" className="form-control" />
-                        </label>
-                    </form>
-                    <div className="header__search-close js-header-search-btn-close"><i className="icon-Cancel"></i>
-                    </div>
-                    <div className="header__search-btn" data-dropdown-btn="search">
-                        Topics<i className="icon-Arrow_Below"></i>
-                    </div>
-                    <div className="dropdown dropdown--design-01" data-dropdown-list="search">
-                        <ul>
-                            <li>
-                                <label>
-                                    <label className="custom-checkbox">
-                                        <input type="checkbox" checked="checked" />
-                                            <i></i>
-                                    </label>Search Titles Only
-                                </label>
 
-                            </li>
-                            <li>
-                                <label>
-                                    <label className="custom-checkbox">
-                                        <input type="checkbox" />
-                                            <i></i>
-                                    </label>Show Results as Posts
-                                </label>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i className="icon-Advanced_Search"></i>Advanced Search
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+
                 </div>
+
                 <div className="header__menu">
                     <div className="header__menu-btn" data-dropdown-btn="menu">
                         Latest Topics<i className="icon-Menu_Icon"></i>
@@ -155,7 +114,7 @@ function NavBar(){
                 </div>
                 <div className="header__user">
                     <div className="header__user-btn" data-dropdown-btn="user">
-                        <img src="fonts/icons/avatars/A.svg" alt="avatar" />
+                        <img src="/fonts/icons/avatars/A.svg" alt="avatar" />
                             azyrusmax<i className="icon-Arrow_Below" />
                     </div>
                     <nav className="dropdown dropdown--design-01" data-dropdown-list="user">
@@ -182,7 +141,9 @@ function NavBar(){
                 </div>
             </div>
             <div className="header__offset-btn">
-                <a href="create-topic.html"><img src="fonts/icons/main/New_Topic.svg" alt="New Topic" /></a>
+                <Link to={'/create-topic'}>
+                    <img src="/fonts/icons/main/New_Topic.svg" alt="New Topic" />
+                </Link>
             </div>
         </div>
     </header>);

@@ -5,18 +5,24 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import NavBar from "./NavBar";
 import Posts from "./Posts";
+import ItemPosts from "./ItemPosts";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import CreateTopic from "./CreateTopic";
+
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <div>
-    <NavBar />
-    <BrowserRouter >
-      <Routes>
-        <Route path='/' element={<Posts />} />
-
-      </Routes>
-    </BrowserRouter>
+        <BrowserRouter >
+        <NavBar />
+            <Routes>
+                <Route path='/' element={<Posts />} />
+                <Route path="/item/:id" element={ <ItemPosts /> } />
+                <Route path='/create-topic' element={ <CreateTopic />} />
+            </Routes>
+        </BrowserRouter>
 
     </div>
 );

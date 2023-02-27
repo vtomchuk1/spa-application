@@ -1,15 +1,16 @@
 import {useState} from "react";
-import {useParams} from "react-router-dom";
+import {Link, Route, useParams} from "react-router-dom";
 import axios from 'axios';
 
 function Posts() {
 
     const [count, setCount] = useState([]);
     const [flag, setFlag]   = useState(1);
+    const [sort, setSort]   = useState(['title', 'desc'])
     const routeParams = useParams();
 
     if(flag){
-        axios.get(`http://127.0.0.1:8000/api/posts/`)
+        axios.get(`http://127.0.0.1:8000/api/posts/sort/${sort[0]}/${sort[1]}`)
             .then(res => {
                 const persons = res.data;
                 setCount(persons);
@@ -17,17 +18,29 @@ function Posts() {
             })
     }
 
+    function custom_sort(name){
+        var current_sort = sort[1];
+        var next_sort = '';
+        if(current_sort == 'desc')
+            next_sort = 'asc';
+        else
+            next_sort = 'desc';
+        console.log(next_sort);
+        setSort([name, next_sort]);
+        setFlag(1);
+    }
+
     return (
 
         <div class='container'>
             <div className="posts">
                 <div className="posts__head">
-                    <div className="posts__topic">Topic</div>
-                    <div className="posts__category">Category</div>
-                    <div className="posts__users">Users</div>
-                    <div className="posts__replies">Replies</div>
-                    <div className="posts__views">Views</div>
-                    <div className="posts__activity">Activity</div>
+                    <div className="posts__topic" onClick={() => custom_sort('title')}>Тема</div>
+                    <div className="posts__category">Пошта</div>
+                    <div className="posts__users">Користувач</div>
+                    <div className="posts__replies" onClick={() => custom_sort('created_at')}>Дата</div>
+                    <div className="posts__views">Час</div>
+
                 </div>
                 { count.map(items =>
                     <div className="posts__body">
@@ -36,9 +49,9 @@ function Posts() {
                             <div className="posts__section-left">
                                 <div className="posts__topic">
                                     <div className="posts__content">
-                                        <a href="#">
+                                        <Link to={'/item/' + items.id}>
                                             <h3>{items.title}</h3>
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                                 <div className="posts__category"><a href="#" className="category">politic</a>
@@ -49,16 +62,10 @@ function Posts() {
                                     <div>
                                         <a href="#" className="avatar"><img src="fonts/icons/avatars/A.svg" alt="avatar"/></a>
                                     </div>
-                                    <div>
-                                        <a href="#" className="avatar"><img src="fonts/icons/avatars/G.svg" alt="avatar"/></a>
-                                    </div>
-                                    <div>
-                                        <a href="#" className="avatar"><img src="fonts/icons/avatars/P.svg" alt="avatar"/></a>
-                                    </div>
                                 </div>
-                                <div className="posts__replies">31</div>
-                                <div className="posts__views">14.5k</div>
-                                <div className="posts__activity">13d</div>
+                                <div className="posts__replies">20.02.2022</div>
+                                <div className="posts__replies">16:45</div>
+
                             </div>
                         </div>
 
