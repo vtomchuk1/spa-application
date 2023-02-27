@@ -21,14 +21,15 @@ class PostController extends Controller
         return $posts;
     }
 
-    public function sort($params)
+    public function sort($params, $flag)
     {
-        $post = Post::query()
-            ->where('id', '=', $params)
+
+        $posts = Post::query()
+            ->orderBy($params, $flag)
             ->with('user')
             ->get();
 
-        return $post;
+        return $posts;
     }
 
     /**
@@ -51,11 +52,15 @@ class PostController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return Post
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
      */
-    public function show(Post $post)
+    public function show($id)
     {
-        return $post;
+        $posts = Post::query()
+            ->where('id', '=', $id)
+            ->with('user')
+            ->first();
+        return $posts;
     }
 
     /**

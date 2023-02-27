@@ -21,6 +21,7 @@ root.render(
                 <Route path='/' element={<Posts />} />
                 <Route path="/item/:id" element={ <ItemPosts /> } />
                 <Route path='/create-topic' element={ <CreateTopic />} />
+                <Route path={'/create-message/:id'} element={ <CreateTopic />} />
             </Routes>
         </BrowserRouter>
 

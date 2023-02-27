@@ -4,14 +4,13 @@ function CreateTopic(){
         <div class='container'>
             <div className="create">
                 <div className="create__head">
-                    <div className="create__title"><img src="/fonts/icons/main/New_Topic.svg" alt="New topic"/>Create New
-                        Thread</div>
-                    <span>Forum Guidelines</span>
+                    <div className="create__title"><img src="/fonts/icons/main/New_Topic.svg" alt="New topic"/>Створити нове повідомленя</div>
                 </div>
                 <div className="create__section">
-                    <label className="create__label" htmlFor="title">Thread Title</label>
-                    <input type="text" className="form-control" id="title" placeholder="Add here"/>
+                    <label className="create__label" htmlFor="title">Тема</label>
+                    <input type="text" className="form-control" id="title" placeholder="Написати тут"/>
                 </div>
+
                 <div className="row">
                     <div className="col-md-6">
                         <div className="create__section">

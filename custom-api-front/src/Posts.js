@@ -13,6 +13,7 @@ function Posts() {
         axios.get(`http://127.0.0.1:8000/api/posts/sort/${sort[0]}/${sort[1]}`)
             .then(res => {
                 const persons = res.data;
+                console.log(persons);
                 setCount(persons);
                 setFlag(0);
             })
@@ -36,7 +37,7 @@ function Posts() {
             <div className="posts">
                 <div className="posts__head">
                     <div className="posts__topic" onClick={() => custom_sort('title')}>Тема</div>
-                    <div className="posts__category">Пошта</div>
+                    <div className="posts__category" onClick={() => custom_sort('email')}>Пошта</div>
                     <div className="posts__users">Користувач</div>
                     <div className="posts__replies" onClick={() => custom_sort('created_at')}>Дата</div>
                     <div className="posts__views">Час</div>
@@ -54,7 +55,7 @@ function Posts() {
                                         </Link>
                                     </div>
                                 </div>
-                                <div className="posts__category"><a href="#" className="category">politic</a>
+                                <div className="posts__category"><a href="#" className="category">{items.user.email}</a>
                                 </div>
                             </div>
                             <div className="posts__section-right">
