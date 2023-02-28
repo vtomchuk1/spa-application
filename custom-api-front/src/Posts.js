@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {Link, Route, useParams} from "react-router-dom";
 import axios from 'axios';
+import Item from "./Item";
 
 function Posts() {
 
@@ -38,39 +39,13 @@ function Posts() {
                 <div className="posts__head">
                     <div className="posts__topic" onClick={() => custom_sort('title')}>Тема</div>
                     <div className="posts__category" onClick={() => custom_sort('email')}>Пошта</div>
-                    <div className="posts__users">Користувач</div>
+                    <div className="posts__users" onClick={() => custom_sort('username')}>Користувач</div>
                     <div className="posts__replies" onClick={() => custom_sort('created_at')}>Дата</div>
                     <div className="posts__views">Час</div>
 
                 </div>
                 { count.map(items =>
-                    <div className="posts__body">
-
-                        <div className="posts__item">
-                            <div className="posts__section-left">
-                                <div className="posts__topic">
-                                    <div className="posts__content">
-                                        <Link to={'/item/' + items.id}>
-                                            <h3>{items.title}</h3>
-                                        </Link>
-                                    </div>
-                                </div>
-                                <div className="posts__category"><a href="#" className="category">{items.user.email}</a>
-                                </div>
-                            </div>
-                            <div className="posts__section-right">
-                                <div className="posts__users">
-                                    <div>
-                                        <a href="#" className="avatar"><img src="fonts/icons/avatars/A.svg" alt="avatar"/></a>
-                                    </div>
-                                </div>
-                                <div className="posts__replies">20.02.2022</div>
-                                <div className="posts__replies">16:45</div>
-
-                            </div>
-                        </div>
-
-                    </div>
+                    <Item id={items.id} title={items.title} email={items.user.email} username={items.user.username}/>
                 )}
 
             </div>

@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('posts/sort/{params}/{flag}', [PostController::class, 'sort'])->name('posts.sort');
 Route::get('posts/{params}', [PostController::class, 'show'])->name('posts.show');
+Route::get('posts/reply/{params}', [PostController::class, 'show_reply'])->name('posts.show_reply');
+
 
 Route::apiResource('posts', PostController::class);
 

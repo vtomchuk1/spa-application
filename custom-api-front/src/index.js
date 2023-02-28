@@ -7,7 +7,8 @@ import NavBar from "./NavBar";
 import Posts from "./Posts";
 import ItemPosts from "./ItemPosts";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import CreateTopic from "./CreateTopic";
+import CreateNewTopic from "./CreateNewTopic";
+import CreateOldTopic from "./CreateOldTopic";
 
 
 
@@ -20,8 +21,8 @@ root.render(
             <Routes>
                 <Route path='/' element={<Posts />} />
                 <Route path="/item/:id" element={ <ItemPosts /> } />
-                <Route path='/create-topic' element={ <CreateTopic />} />
-                <Route path={'/create-message/:id'} element={ <CreateTopic />} />
+                <Route path='/create-topic' element={ <CreateNewTopic />} />
+                <Route path={'/create-message/:id'} element={ <CreateOldTopic />} />
             </Routes>
         </BrowserRouter>
 

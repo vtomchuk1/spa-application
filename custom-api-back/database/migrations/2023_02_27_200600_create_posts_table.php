@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('reply')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('userts');
-            $table->string('title');
+            $table->string('title')->nullable();
             $table->text('body');
             $table->string('include_file')->nullable();
             $table->timestamps();
