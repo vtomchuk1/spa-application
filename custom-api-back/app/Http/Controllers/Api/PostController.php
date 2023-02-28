@@ -60,6 +60,15 @@ class PostController extends Controller
     {
         $post = new Post;
 
+        $rules = ['data.captcha' => 'required|captcha'];
+        $validator = validator()->make($request->all(), $rules);
+        if ($validator->fails()) {
+            return "error";
+        } else {
+            return "ok";
+        }
+
+
         $user_email = $request->data['email'];
         $user_username = $request->data['username'];
 

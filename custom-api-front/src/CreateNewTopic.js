@@ -10,8 +10,22 @@ function CreateNewTopic(){
         title: '',
         body: '',
         homepage: '',
+        captcha: '',
     });
+    const [flag, setFlag] = useState(1);
+    const [img, setImg] = useState('');
+
     const navigate = useNavigate();
+
+    if(flag){
+        axios.get(`http://127.0.0.1:8000/api/reload-captcha`)
+            .then(res => {
+                const persons = res.data.captcha.slice(10, -3);
+                console.log(persons);
+                setImg(persons);
+                setFlag(0);
+            })
+    }
 
     function onChange(e){
         var username = e.target.id == 'username' ? e.target.value : data.username;
@@ -19,13 +33,15 @@ function CreateNewTopic(){
         var title = e.target.id == 'title' ? e.target.value : data.title;
         var body = e.target.id == 'body' ? e.target.value : data.body;
         var homepage = e.target.id == 'homepage' ? e.target.value : data.homepage;
+        var captcha = e.target.id == 'captcha' ? e.target.value : data.captcha;
 
         setData({
             username: username,
             email: email,
             title: title,
             body: body,
-            homepage: homepage
+            homepage: homepage,
+            captcha: captcha,
         });
     }
 
@@ -84,6 +100,11 @@ function CreateNewTopic(){
                 <div className="create__section">
                     <label className="create__label" htmlFor="homepage">Домашня сторінка</label>
                     <input type="text" className="form-control" id="homepage" placeholder="Написати url" value={data.homepage} onChange={onChange}/>
+                </div>
+                <div className="create__section">
+                    <label className="create__label" htmlFor="homepage">captcha</label>
+                    <img src={img} alt={'text'}/>
+                    <input type="text" className="form-control" id="captcha" placeholder="captcha" value={data.captcha} onChange={onChange}/>
                 </div>
                 <div className="create__footer">
                     <a href="#" className="create__btn-create btn btn--type-02" onClick={show}>Створити допис</a>

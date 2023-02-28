@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CaptchaServiceController;
 use App\Http\Controllers\Api\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -14,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::get('/contact-form', [CaptchaServiceController::class, 'index']);
+Route::post('/captcha-validation', [CaptchaServiceController::class, 'capthcaFormValidate']);
+Route::get('/reload-captcha', [CaptchaServiceController::class, 'reloadCaptcha']);
 
 Route::get('posts/sort/{params}/{flag}', [PostController::class, 'sort'])->name('posts.sort');
 Route::get('posts/{params}', [PostController::class, 'show'])->name('posts.show');
