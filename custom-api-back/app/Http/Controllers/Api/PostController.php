@@ -68,6 +68,15 @@ class PostController extends Controller
             ->where('username', '=', $user_username)
             ->first();
 
+        if(!isset($user->id)){
+            $user = new Usert;
+            $user->username = $user_username;
+            $user->email = $user_email;
+            if(isset($request->data['homepage']))
+                $user->homepage = $request->data['homepage'];
+            $user->save();
+        }
+
         $post->user_id = $user->id;
 
         if(isset($request->data['title']))

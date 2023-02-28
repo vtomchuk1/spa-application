@@ -40,12 +40,12 @@ function Posts() {
                     <div className="posts__topic" onClick={() => custom_sort('title')}>Тема</div>
                     <div className="posts__category" onClick={() => custom_sort('email')}>Пошта</div>
                     <div className="posts__users" onClick={() => custom_sort('username')}>Користувач</div>
-                    <div className="posts__replies" onClick={() => custom_sort('created_at')}>Дата</div>
-                    <div className="posts__views">Час</div>
+                    <div className="posts__replies" onClick={() => custom_sort('created_at')}>Час створення</div>
+
 
                 </div>
                 { count.map(items =>
-                    <Item id={items.id} title={items.title} email={items.user.email} username={items.user.username}/>
+                    <Item id={items.id} title={items.title} email={items.user.email} username={items.user.username} date={items.created_at}/>
                 )}
 
             </div>
