@@ -16,9 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/contact-form', [CaptchaServiceController::class, 'index']);
-Route::post('/captcha-validation', [CaptchaServiceController::class, 'capthcaFormValidate']);
-Route::get('/reload-captcha', [CaptchaServiceController::class, 'reloadCaptcha']);
+Route::get('/create-captcha', [CaptchaServiceController::class, 'index']);
+Route::post('/captcha-validation', [CaptchaServiceController::class, 'captchaFormValidate']);
+
 
 Route::get('posts/sort/{params}/{flag}', [PostController::class, 'sort'])->name('posts.sort');
 Route::get('posts/{params}', [PostController::class, 'show'])->name('posts.show');

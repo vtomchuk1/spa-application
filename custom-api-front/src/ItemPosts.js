@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useState} from "react";
 import {Link, useParams} from "react-router-dom";
 import axios from "axios";
 import CommentPost from "./CommentPost";
@@ -8,7 +8,7 @@ function ItemPosts(){
 
     const [count, setCount] = useState({
         user : '',
-
+        created_at: '123456789123456789123456789'
     });
     const routeParams = useParams();
 
@@ -40,7 +40,7 @@ function ItemPosts(){
                                     <div className="topic__name">
                                         <a href="#">{ count.user.username   }</a>
                                     </div>
-                                    <div className="topic__date"><i className="icon-Watch_Later"></i>{count.created_at}</div>
+                                    <div className="topic__date"><i className="icon-Watch_Later"></i>{count.created_at.slice(0, 19)}</div>
                                 </div>
                             </div>
                             <div className="topic__content">

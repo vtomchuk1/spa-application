@@ -7,6 +7,7 @@ use App\Models\Models\Post;
 use App\Models\Models\Usert;
 use http\Client\Curl\User;
 use Illuminate\Http\Request;
+use Mews\Captcha\Facades\Captcha;
 
 class PostController extends Controller
 {
@@ -50,6 +51,7 @@ class PostController extends Controller
         return $posts;
     }
 
+
     /**
      * Store a newly created resource in storage.
      *
@@ -58,16 +60,13 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $post = new Post;
+        $nnn = new CaptchaServiceController();
+        $flag = $nnn->captchaFormValidate($request->data['captcha']);
 
-        $rules = ['data.captcha' => 'required|captcha'];
-        $validator = validator()->make($request->all(), $rules);
-        if ($validator->fails()) {
+        if(!$flag)
             return "error";
-        } else {
-            return "ok";
-        }
 
+        $post = new Post;
 
         $user_email = $request->data['email'];
         $user_username = $request->data['username'];

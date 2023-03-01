@@ -13,7 +13,10 @@ function CreateNewTopic(){
         reply: params.id,
         body: '',
         homepage: '',
+        captcha: '',
     });
+    const [flag, setFlag] = useState(1);
+    const [img, setImg] = useState('');
 
     function onChange(e){
         var username = e.target.id == 'username' ? e.target.value : data.username;
@@ -21,15 +24,26 @@ function CreateNewTopic(){
         var reply = e.target.id == 'reply' ? e.target.value : data.reply;
         var body = e.target.id == 'body' ? e.target.value : data.body;
         var homepage = e.target.id == 'homepage' ? e.target.value : data.homepage;
-
+        var captcha = e.target.id == 'captcha' ? e.target.value : data.captcha;
 
         setData({
             username: username,
             email: email,
             reply: reply,
             body: body,
-            homepage: homepage
+            homepage: homepage,
+            captcha: captcha
         });
+    }
+
+    if(flag){
+        axios.get(`http://127.0.0.1:8000/api/create-captcha`)
+            .then(res => {
+                const persons = 'http://127.0.0.1:8000/' + res.data.name ;
+                console.log(persons);
+                setImg(persons);
+                setFlag(0);
+            })
     }
 
     function show(){
@@ -37,8 +51,14 @@ function CreateNewTopic(){
         console.log('send data');
         axios.post(`http://127.0.0.1:8000/api/posts`, { data })
             .then(res => {
-                console.log(res.data.id);
-                navigate(`/item/${res.data.reply}`);
+                if(res.data != 'error') {
+                    console.log(res.data.id);
+                    navigate(`/item/${res.data.reply}`);
+                }
+                else{
+                    alert('error captcha');
+                    navigate('/');
+                }
             })
     }
 
@@ -87,6 +107,11 @@ function CreateNewTopic(){
                 <div className="create__section">
                     <label className="create__label" htmlFor="homepage">Домашня сторінка</label>
                     <input type="text" className="form-control" id="homepage" placeholder="Написати url" value={data.homepage} onChange={onChange}/>
+                </div>
+                <div className="create__section">
+                    <label className="create__label" htmlFor="homepage">captcha</label>
+                    <img src={img} alt={'text'}/>
+                    <input type="text" className="form-control" id="captcha" placeholder="captcha" value={data.captcha} onChange={onChange}/>
                 </div>
                 <div className="create__footer">
                     <a href="#" className="create__btn-create btn btn--type-02" onClick={show}>Створити допис</a>

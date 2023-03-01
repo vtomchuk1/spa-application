@@ -18,9 +18,9 @@ function CreateNewTopic(){
     const navigate = useNavigate();
 
     if(flag){
-        axios.get(`http://127.0.0.1:8000/api/reload-captcha`)
+        axios.get(`http://127.0.0.1:8000/api/create-captcha`)
             .then(res => {
-                const persons = res.data.captcha.slice(10, -3);
+                const persons = 'http://127.0.0.1:8000/' + res.data.name ;
                 console.log(persons);
                 setImg(persons);
                 setFlag(0);
@@ -50,8 +50,14 @@ function CreateNewTopic(){
         console.log('send data');
         axios.post(`http://127.0.0.1:8000/api/posts`, { data })
             .then(res => {
-                console.log(res.data.id);
-                navigate(`/item/${res.data.id}`);
+                if(res.data != 'error') {
+                    console.log(res.data.id);
+                    navigate(`/item/${res.data.id}`);
+                }
+                else{
+                    alert('error captcha');
+                    navigate('/');
+                }
             })
     }
 
