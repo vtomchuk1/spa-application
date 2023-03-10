@@ -31,7 +31,7 @@ function CommentPost(props){
                         <div className="topic__name">
                             <a href="#">{items.user.username}</a>
                         </div>
-                        <div className="topic__date"><i className="icon-Watch_Later"></i>25.07.1011</div>
+                        <div className="topic__date"><i className="icon-Watch_Later"></i>{items.created_at.slice(0, 19)}</div>
                     </div>
 
                 </div>

@@ -8,7 +8,7 @@ function ItemPosts(){
 
     const [count, setCount] = useState({
         user : '',
-        created_at: '123456789123456789123456789'
+        created_at: '123456789123456789123456789',
     });
     const routeParams = useParams();
 
@@ -44,8 +44,8 @@ function ItemPosts(){
                                 </div>
                             </div>
                             <div className="topic__content">
-                                <div className="topic__text">
-                                    <p>{count.body}</p>
+                                <div className="topic__text" dangerouslySetInnerHTML={{__html: count.body}}>
+
 
                                 </div>
                                 <div className="topic__footer">

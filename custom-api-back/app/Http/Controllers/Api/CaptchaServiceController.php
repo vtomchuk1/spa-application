@@ -13,7 +13,7 @@ class CaptchaServiceController extends Controller
     public function index()
     {
         // length string
-        $length = 6;
+        $length = 3;
         // generate random char string
         $code = Str::random($length);
 
