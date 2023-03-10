@@ -61,6 +61,26 @@ function CreateNewTopic(){
             })
     }
 
+    function areastrong(){
+
+        var dddd = data.body;
+        dddd += 'test5';
+        setData(dddd);
+    }
+
+    function areai(){
+        alert('press');
+
+    }
+
+    function areaa(){
+
+    }
+
+    function areacode(){
+
+    }
+
     return (
         <div class='container'>
             <div className="create">
@@ -82,24 +102,12 @@ function CreateNewTopic(){
                 <div className="create__section create__textarea">
                     <label className="create__label" htmlFor="body">Текст</label>
                     <div className="create__textarea-head">
-                        <span><i className="icon-Quote"></i></span>
-                        <span><i className="icon-Bold"></i></span>
-                        <span><i className="icon-Italic"></i></span>
-                        <div className="create__textarea-separate"></div>
-                        <span><i className="icon-Share_Topic"></i></span>
-                        <span><i className="icon-BlockQuote"></i></span>
-                        <span><i className="icon-Performatted"></i></span>
-                        <span><i className="icon-Upload_Files"></i></span>
-                        <span className="create__textarea-separate"></span>
-                        <span><i className="icon-Bullet_List"></i></span>
-                        <span><i className="icon-heading"></i></span>
-                        <span><i className="icon-Horizontal_Line"></i></span>
-                        <span><i className="icon-Emoticon"></i></span>
-                        <span><i className="icon-Settings"></i></span>
-                        <span><i className="icon-Color_Picker"></i></span>
-                        <div className="create__textarea-btn">
-                            <a href="#" className="btn">Preview</a>
-                        </div>
+
+                        <span><i className="icon-Bold"  ></i></span>
+                        <span><i className="icon-Italic" ></i></span>
+                        <span><i className="icon-Share_Topic" ></i></span>
+                        <span><i className="icon-Performatted" ></i></span>
+
                     </div>
                     <textarea className="form-control" id="body" placeholder={'Написати текст допису'} value={data.body} onChange={onChange}></textarea>
                 </div>
