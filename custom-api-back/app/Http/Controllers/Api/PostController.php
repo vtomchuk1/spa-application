@@ -63,6 +63,8 @@ class PostController extends Controller
         $nnn = new CaptchaServiceController();
         $flag = $nnn->captchaFormValidate($request->data['captcha']);
 
+
+
         if(!$flag)
             return "error";
 
