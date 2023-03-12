@@ -50,7 +50,7 @@ return [
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'spa_app'),
             'username' => env('DB_USERNAME', 'spa_app'),
-            'password' => env('DB_PASSWORD', 'oi3AB49obd7hL.jL'),
+            'password' => env('DB_PASSWORD', 'NzHbgXKnYeN6.(/H'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',

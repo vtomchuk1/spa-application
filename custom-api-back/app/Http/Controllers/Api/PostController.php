@@ -7,7 +7,9 @@ use App\Models\Models\Post;
 use App\Models\Models\Usert;
 use http\Client\Curl\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Mews\Captcha\Facades\Captcha;
+use Mockery\Exception;
 
 class PostController extends Controller
 {
@@ -60,10 +62,29 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+
+
+        if(!preg_match("/^[a-zA-Z0-9_-]{2,50}$/", $request->data['username']))
+            return "error";
+
+        if(!preg_match("/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i", $request->data['email']))
+            return "error";
+        /*
+        try {
+            if(!preg_match("/^[a-zA-Zа-яА-Я0-9_-]{2,50}$/", $request->data['title']))
+                return "error";
+        }
+        catch (Exception $e){
+            $a = 1;
+        }
+        */
+
+
+        if(!preg_match("/^[a-zA-Z0-9_-]{2,50}$/", $request->data['captcha']))
+            return "error";
+
         $nnn = new CaptchaServiceController();
         $flag = $nnn->captchaFormValidate($request->data['captcha']);
-
-
 
         if(!$flag)
             return "error";
@@ -100,7 +121,20 @@ class PostController extends Controller
             $post->reply = null;
 
         $post->body = $request->data['body'];
+        if(isset($request->data['include_file']))
+            $post->include_file = $request->data['include_file'];
+        else
+            $post->include_file = '';
         $post->save();
+
+        //$file = $request->file('file')->store('uploads');
+        //$url = Storage::url($file);
+
+        /*
+        $destinationPath = 'uploads';
+        $file->move($destinationPath,$file->getClientOriginalName());
+        $post->include_file = $file->getClientOriginalName();
+        */
 
         return $post;
     }

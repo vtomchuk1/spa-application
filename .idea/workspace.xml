@@ -14,6 +14,13 @@
     <pharConfigPath>$PROJECT_DIR$/custom-api-back/composer.json</pharConfigPath>
     <execution />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -166,6 +173,8 @@
       <workItem from="1678443297297" duration="1732000" />
       <workItem from="1678458378813" duration="14016000" />
       <workItem from="1678531188598" duration="600000" />
+      <workItem from="1678560400433" duration="847000" />
+      <workItem from="1678619545220" duration="17838000" />
     </task>
     <servers />
   </component>

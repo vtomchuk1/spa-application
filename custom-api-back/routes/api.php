@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('/uploadfile',[\App\Http\Controllers\UploadFileController::class, 'showUploadFile']);
+
 Route::get('/create-captcha', [CaptchaServiceController::class, 'index']);
 Route::post('/captcha-validation', [CaptchaServiceController::class, 'captchaFormValidate']);
 

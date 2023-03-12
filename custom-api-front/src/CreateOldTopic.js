@@ -3,6 +3,8 @@ import axios from "axios";
 import {useNavigate, useParams} from "react-router-dom";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import {CKEditor} from "@ckeditor/ckeditor5-react";
+import UploadFileForm from "./UploadFileForm";
+import {useCookies} from "react-cookie";
 
 function CreateNewTopic(){
 
@@ -19,6 +21,12 @@ function CreateNewTopic(){
     });
     const [flag, setFlag] = useState(1);
     const [img, setImg] = useState('');
+    const [file, setFile] = useState(null);
+
+    function updateData(value){
+        setFile(value);
+        console.log(value);
+    }
 
     function onChange(e, flag = 0){
 
@@ -85,11 +93,11 @@ function CreateNewTopic(){
         console.log(dat);
         console.log('send data');
 
-
         var reg_username = /^[a-zA-Z0-9_-]{2,50}$/;
         var reg_email = /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i;
         var reg_reply = /^[0-9]{1,10}$/;
 
+        var img = file;
 
         let data = {
             username: dat.username.match(reg_username)[0],
@@ -98,9 +106,10 @@ function CreateNewTopic(){
             body: dat.body,
             homepage: dat.homepage.match(reg_username)[0],
             captcha: dat.captcha.match(reg_username)[0],
+            include_file: img,
         };
 
-        console.log('send reg  ' + data);
+        console.log('send reg  ' , data);
         axios.post(`http://127.0.0.1:8000/api/posts`, { data })
             .then(res => {
                 if(res.data != 'error') {
@@ -132,6 +141,7 @@ function CreateNewTopic(){
                     <label className="create__label" htmlFor="title">На яке повідомлення відповідь</label>
                     <input type="text" className="form-control" id="title" placeholder="Написати тему" value={dat.reply} onChange={onChange} disabled/>
                 </div>
+                <UploadFileForm updateData={updateData}></UploadFileForm>
                 <CKEditor
                     editor={ ClassicEditor }
                     data="<p>Hello from CKEditor 5!</p>"

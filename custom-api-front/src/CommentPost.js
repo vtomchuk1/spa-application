@@ -18,6 +18,15 @@ function CommentPost(props){
             })
     }
 
+    function fil(type){
+        var ex = type.split('.')[1];
+        console.log('type fiel : ', type);
+        if(ex == 'txt')
+            return <a href={"http://127.0.0.1:8000/" + type} download >download file</a>
+        else
+            return <img src={"http://127.0.0.1:8000/" + type} alt={''}/>
+    }
+
     return (
         <div>
         { count.map(items =>
@@ -39,6 +48,7 @@ function CommentPost(props){
                     <div className="topic__text">
                         <p>{items.body}</p>
                     </div>
+                    {fil(items.include_file)}
                 </div>
             </div>
         )}

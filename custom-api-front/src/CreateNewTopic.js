@@ -1,11 +1,13 @@
 import {useState} from "react";
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
+import {Form, useNavigate} from "react-router-dom";
 import React from "react";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import Link from '@editorjs/link';
+import UploadFileForm from "./UploadFileForm";
+import {useCookies} from "react-cookie";
 
 function CreateNewTopic(){
 
@@ -18,10 +20,15 @@ function CreateNewTopic(){
         captcha: '',
     });
 
+
+
     const [flag, setFlag] = useState(1);
     const [img, setImg] = useState('');
+    const [file, setFile] = useState(null);
 
     const navigate = useNavigate();
+
+
 
 
     if(flag){
@@ -33,11 +40,17 @@ function CreateNewTopic(){
                 setFlag(0);
             })
     }
+    /*
+    function onFile(e){
+        setFfff(e.target.files[0]);
+    }
 
+     */
     function onChange(e, flag = 0){
 
 
-        if(flag){
+
+        if(flag != 0){
             var body = flag;
             var username = dat.username;
             var email = dat.email;
@@ -48,6 +61,18 @@ function CreateNewTopic(){
         }
         else
         {
+            /*
+            if(e.target.id == 'file')
+            {
+                setFfff(e.target.value);
+                console.log('file', e.target.value);
+                console.log('obj file ', ffff);
+            }
+
+            console.log('obj file ', ffff);
+
+             */
+
             var body = dat.body;
             var username = e.target.id == 'username' ? e.target.value : dat.username;
             var email = e.target.id == 'email' ? e.target.value : dat.email;
@@ -78,6 +103,11 @@ function CreateNewTopic(){
         var reg_email = /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i;
         var reg_title = /^[a-zA-Zа-яА-Я0-9_-]{2,50}$/;
 
+        var img = file;
+
+        //const formdata = new FormData();
+        //formdata.append('file', ffff);
+
         let data = {
             username: dat.username.match(reg_username)[0],
             email: dat.email.match(reg_email)[0],
@@ -85,9 +115,12 @@ function CreateNewTopic(){
             body: dat.body,
             homepage: dat.homepage.match(reg_username)[0],
             captcha: dat.captcha.match(reg_username)[0],
+            include_file: img,
         }
-        axios.post(`http://127.0.0.1:8000/api/posts`, { data })
+
+        axios.post(`http://127.0.0.1:8000/api/posts`, { data } )
             .then(res => {
+
                 if(res.data != 'error') {
                     console.log(res.data.id);
                     navigate(`/item/${res.data.id}`);
@@ -97,6 +130,11 @@ function CreateNewTopic(){
                     navigate('/');
                 }
             })
+    }
+
+    function updateData(value){
+        setFile(value);
+        console.log(value);
     }
 
 
@@ -118,6 +156,7 @@ function CreateNewTopic(){
                     <label className="create__label" htmlFor="title">Тема</label>
                     <input require type="text" className="form-control" id="title" placeholder="Написати тему" value={dat.title} onChange={onChange}/>
                 </div>
+                <UploadFileForm updateData={updateData}></UploadFileForm>
                 <CKEditor
                     editor={ ClassicEditor }
                     data="<p>Hello from CKEditor 5!</p>"

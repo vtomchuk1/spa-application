@@ -9,6 +9,7 @@ function ItemPosts(){
     const [count, setCount] = useState({
         user : '',
         created_at: '123456789123456789123456789',
+        include_file: '123.13'
     });
     const routeParams = useParams();
 
@@ -20,6 +21,15 @@ function ItemPosts(){
                 setCount(persons);
             }, [])
     }
+
+    function fil(type){
+        console.log('type fiel : ', type);
+        if(type == 'txt')
+            return <a href={"http://127.0.0.1:8000/" + count.include_file} download >download file</a>
+        else
+            return <img src={"http://127.0.0.1:8000/" + count.include_file} alt={''}/>
+    }
+
 
     return(
         <div class='container' onLoad={req} >
@@ -48,6 +58,7 @@ function ItemPosts(){
 
 
                                 </div>
+                                {fil(count.include_file.split('.')[1])}
                                 <div className="topic__footer">
                                     <div className="topic__footer-share">
                                         <Link to={'/create-message/' + count.id}>

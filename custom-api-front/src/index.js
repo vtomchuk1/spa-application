@@ -9,6 +9,7 @@ import ItemPosts from "./ItemPosts";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CreateNewTopic from "./CreateNewTopic";
 import CreateOldTopic from "./CreateOldTopic";
+import {CookiesProvider} from "react-cookie";
 
 
 
@@ -16,16 +17,17 @@ import CreateOldTopic from "./CreateOldTopic";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <div>
-        <BrowserRouter >
-            <NavBar />
-            <Routes>
-                <Route path='/' element={<Posts />} />
-                <Route path="/item/:id" element={ <ItemPosts /> } />
-                <Route path='/create-topic' element={ <CreateNewTopic />} />
-                <Route path={'/create-message/:id'} element={ <CreateOldTopic />} />
-            </Routes>
-        </BrowserRouter>
-
+        <CookiesProvider>
+            <BrowserRouter >
+                <NavBar />
+                <Routes>
+                    <Route path='/' element={<Posts />} />
+                    <Route path="/item/:id" element={ <ItemPosts /> } />
+                    <Route path='/create-topic' element={ <CreateNewTopic />} />
+                    <Route path={'/create-message/:id'} element={ <CreateOldTopic />} />
+                </Routes>
+            </BrowserRouter>
+        </CookiesProvider>
     </div>
 );
 
