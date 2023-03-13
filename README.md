@@ -12,6 +12,6 @@ Laravel, React
 
 Запуск проекту
 - в папці custom-api-back виконати команду 'composer install'
-- налаштувати підключення до бази
+- налаштувати підключення до бази /custom-api-back/config/database.php
 - виконати команду 'php artisan migrate'
 - в папці custom-api-front виконати команду 'npm install && npm start'
